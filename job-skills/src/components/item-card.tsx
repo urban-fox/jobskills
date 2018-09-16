@@ -10,13 +10,20 @@ export class ItemCard extends React.Component {
     this.props = props;
   }
 
-
+  
+  public test(text: any){
+    alert(text);
+    return text;
+  }
+  
+  
   public render(){
     const title = this.props.title;
     const detail = this.props.detail;
     const clickHandler = this.props.clickHandler;
+    // const clickHandler = this.test;
     return(
-      <Card onClick={clickHandler(this.props.jobID)}>
+      <Card onClick={clickHandler ? clickHandler.bind(this, this.props.jobID): null}>
         <CardContent>
           <Typography variant="headline">
             {title}

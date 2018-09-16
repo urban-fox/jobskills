@@ -83,7 +83,8 @@ class App extends React.Component<{}, IState> {
   
   public getSkills(jobID: any){
     if (jobID === undefined){return;}
-      fetch('http://api.dataatwork.org/v1/jobs/' + jobID + 'related_skills', {
+    else {
+      fetch('http://api.dataatwork.org/v1/jobs/' + jobID + '/related_skills', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -94,13 +95,18 @@ class App extends React.Component<{}, IState> {
         temp = temp + 1;
       }
       else {
-        response.json().then((data: any) => this.setState({
+        response.json().then((data: any) => {this.setState({
           displayedSkills: data.skills
-        }))
+        });
+        // test
+        // alert("skills updated");
+        }
+        )
       }
       });
-    
+    }
   }
+
 
   public render() {
     const jobs = this.state.displayedJobs;
@@ -110,10 +116,12 @@ class App extends React.Component<{}, IState> {
         <SearchBar setJobs={this.setJobs} />
         <Grid container={true} spacing={16}>
           <Grid item={true} xs={6}>
+            <h1>Jobs</h1>
             <CardPanel jobs={jobs} getSkills={this.getSkills} />
           </Grid>
           <Grid item={true} xs={6}>
-            <CardPanelSkills jobs={skills}/>
+            <h1>Associated Skills</h1>
+            <CardPanelSkills skills={skills} />
           </Grid>
       </Grid>
       </div>

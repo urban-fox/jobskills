@@ -17,7 +17,7 @@ export class CardPanelSkills extends React.Component<{},{}> {
 
   public render(){
     const skills = this.props.skills? this.props.skills.map((skill: any) =>
-      <ItemCard title={skill.name} detail={skill.description} key={skill.skill_uuid} />
+      <ItemCard title={skill.skill_name} detail={skill.description} key={skill.skill_uuid} />
     ) : ""
     ;
 
