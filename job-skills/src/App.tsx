@@ -3,6 +3,7 @@ import * as React from 'react';
 import './App.css';
 
 import { CardPanel } from "./components/card-panel";
+import { CardPanelSkills } from "./components/card-panel-skills";
 import { SearchBar } from './components/searchbar';
 
 /*
@@ -20,7 +21,8 @@ interface IProps {
 }
 */
 interface IState {
-  displayedJobs: any[]
+  displayedJobs: any[],
+  displayedSkills: any[]
 }
 /*
 interface ISkill {
@@ -65,29 +67,53 @@ class App extends React.Component<{}, IState> {
   constructor(props: any) {
     super(props);
     this.setJobs = this.setJobs.bind(this);
-    this.state = {displayedJobs: [{initial: "one"}, {initial: "two"}]};
+    this.getSkills = this.getSkills.bind(this);
+    this.state = {
+      displayedJobs: [],
+      displayedSkills: []
+    };
   }
 
   public setJobs(jobs: any){
-    // alert(JSON.stringify(jobs));
-    
     this.setState(
       {displayedJobs: jobs}
     );
   }
 
+  
+  public getSkills(jobID: any){
+    if (jobID === undefined){return;}
+      fetch('http://api.dataatwork.org/v1/jobs/' + jobID + 'related_skills', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      }
+    }).then((response : any) => {
+      if (!response.ok) {
+        let temp = 5;
+        temp = temp + 1;
+      }
+      else {
+        response.json().then((data: any) => this.setState({
+          displayedSkills: data.skills
+        }))
+      }
+      });
+    
+  }
+
   public render() {
-    const jobs = JSON.stringify(this.state.displayedJobs);
+    const jobs = this.state.displayedJobs;
+    const skills = this.state.displayedSkills;
     return (
       <div className="App">
         <SearchBar setJobs={this.setJobs} />
         <Grid container={true} spacing={16}>
           <Grid item={true} xs={6}>
-            <CardPanel setJobs={this.setJobs} />
-            {jobs}
+            <CardPanel jobs={jobs} getSkills={this.getSkills} />
           </Grid>
           <Grid item={true} xs={6}>
-            <CardPanel setJobs={this.setJobs}/>
+            <CardPanelSkills jobs={skills}/>
           </Grid>
       </Grid>
       </div>

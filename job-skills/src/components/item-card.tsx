@@ -3,23 +3,26 @@ import Typography from '@material-ui/core/Typography';
 import * as React from "react";
 
 export class ItemCard extends React.Component {
-  public classes: any;
+  public props: any;
 
   constructor(props: any){
     super(props);
-    this.classes = props;
+    this.props = props;
   }
 
 
   public render(){
+    const title = this.props.title;
+    const detail = this.props.detail;
+    const clickHandler = this.props.clickHandler;
     return(
-      <Card className={this.classes.card}>
+      <Card onClick={clickHandler(this.props.jobID)}>
         <CardContent>
           <Typography variant="headline">
-            Card Title
+            {title}
           </Typography>
           <Typography variant='body1'>
-            Description text
+            {detail}
           </Typography>
         </CardContent>
       </Card>

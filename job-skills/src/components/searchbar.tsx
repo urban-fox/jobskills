@@ -2,11 +2,9 @@ import {AppBar, Button, Input, Toolbar, Typography} from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';
 import * as React from 'react';
 
-interface IState{
-  results: any
-}
 
-export class SearchBar extends React.Component<{}, IState> {
+
+export class SearchBar extends React.Component<{}, {}> {
   public props: any;
   constructor(props: any){
     super(props);

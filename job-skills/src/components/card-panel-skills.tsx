@@ -3,7 +3,7 @@ import * as React from "react";
 import { ItemCard } from "./item-card";
 
 
-export class CardPanel extends React.Component<{},{}> {
+export class CardPanelSkills extends React.Component<{},{}> {
   public props: any;
 
   constructor(props: any){
@@ -12,12 +12,12 @@ export class CardPanel extends React.Component<{},{}> {
   }
 
   // getSkills=this.props.getSkills(jobID)
-  
+
 
 
   public render(){
-    const jobs = this.props.jobs? this.props.jobs.map((job: any) =>
-      <ItemCard title={job.suggestion} detail={""} key={job.uuid} jobID={job.uuid} clickHandler={this.props.getSkills}/>
+    const skills = this.props.skills? this.props.skills.map((skill: any) =>
+      <ItemCard title={skill.name} detail={skill.description} key={skill.skill_uuid} />
     ) : ""
     ;
 
@@ -25,7 +25,7 @@ export class CardPanel extends React.Component<{},{}> {
       
       <div>
         <ul>
-          {jobs}
+          {skills}
         </ul>
       </div>
 
