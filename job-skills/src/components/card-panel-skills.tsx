@@ -1,6 +1,6 @@
 
 import * as React from "react";
-import { ItemCard } from "./item-card";
+import { SkillCard } from "./skill-card";
 
 
 export class CardPanelSkills extends React.Component<{},{}> {
@@ -17,7 +17,7 @@ export class CardPanelSkills extends React.Component<{},{}> {
 
   public render(){
     const skills = this.props.skills? this.props.skills.map((skill: any) =>
-      <ItemCard title={skill.skill_name} detail={skill.description} key={skill.skill_uuid} />
+      <SkillCard title={skill.skill_name} detail={skill.description} key={skill.skill_uuid} />
     ) : ""
     ;
 

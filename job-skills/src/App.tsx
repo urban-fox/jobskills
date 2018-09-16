@@ -22,6 +22,7 @@ interface IProps {
 */
 interface IState {
   displayedJobs: any[],
+  selectedJobs: any[],
   displayedSkills: any[]
 }
 /*
@@ -70,6 +71,7 @@ class App extends React.Component<{}, IState> {
     this.getSkills = this.getSkills.bind(this);
     this.state = {
       displayedJobs: [],
+      selectedJobs: [],
       displayedSkills: []
     };
   }
@@ -82,6 +84,11 @@ class App extends React.Component<{}, IState> {
 
   
   public getSkills(jobID: any){
+    // clear skills
+    this.setState({
+      displayedSkills: [],
+      selectedJobs: [jobID]
+    })
     if (jobID === undefined){return;}
     else {
       fetch('http://api.dataatwork.org/v1/jobs/' + jobID + '/related_skills', {
@@ -110,6 +117,7 @@ class App extends React.Component<{}, IState> {
 
   public render() {
     const jobs = this.state.displayedJobs;
+    const selectedJobs = this.state.selectedJobs;
     const skills = this.state.displayedSkills;
     return (
       <div className="App">
@@ -117,7 +125,7 @@ class App extends React.Component<{}, IState> {
         <Grid container={true} spacing={16}>
           <Grid item={true} xs={6}>
             <h1>Jobs</h1>
-            <CardPanel jobs={jobs} getSkills={this.getSkills} />
+            <CardPanel jobs={jobs} selectedItems={selectedJobs} getSkills={this.getSkills} />
           </Grid>
           <Grid item={true} xs={6}>
             <h1>Associated Skills</h1>

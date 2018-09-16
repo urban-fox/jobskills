@@ -17,7 +17,12 @@ export class CardPanel extends React.Component<{},{}> {
 
   public render(){
     const jobs = this.props.jobs? this.props.jobs.map((job: any) =>
-      <ItemCard title={job.suggestion} detail={""} key={job.uuid} jobID={job.uuid} clickHandler={this.props.getSkills}/>
+      <ItemCard 
+        selected={this.props.selectedItems.find((x: any) => x === job.uuid)}
+        title={job.suggestion} 
+        detail={""} key={job.uuid} 
+        jobID={job.uuid} 
+        clickHandler={this.props.getSkills}/>
     ) : ""
     ;
 

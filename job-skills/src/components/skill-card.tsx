@@ -6,7 +6,7 @@ import { themes } from "./../theme";
 interface IState{
   theme: any
 }
-export class ItemCard extends React.Component<{}, IState> {
+export class SkillCard extends React.Component<{}, IState> {
   public props: any;
 
   constructor(props: any){
@@ -23,20 +23,14 @@ export class ItemCard extends React.Component<{}, IState> {
     return text;
   }
 
-  public clickHandler(jobID: any){
-    this.props.clickHandler(jobID);
-  }
-  
   
   public render(){
     const title = this.props.title;
     const detail = this.props.detail;
     const currentTheme = this.props.selected ? themes.dark: themes.light;
-    // const clickHandler = this.props.clickHandler;
-    // const clickHandler = this.test;
+
     return(
       <Card 
-        onClick={this.clickHandler ? this.clickHandler.bind(this, this.props.jobID): null} 
         style={{backgroundColor: currentTheme.background, color: currentTheme.foreground}}>
         <CardContent>
           <Typography variant="headline" style={{color: this.state.theme.foreground}}>

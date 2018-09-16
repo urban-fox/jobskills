@@ -21,6 +21,7 @@ export class SearchBar extends React.Component<{}, IState> {
     // this.changeState = this.changeState.bind(this)
     this.searchFunction = this.searchFunction.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleKey = this.handleKey.bind(this)
     /*
     this.state = {
       results: ''
@@ -42,6 +43,7 @@ export class SearchBar extends React.Component<{}, IState> {
   public searchFunction(e: any){
     // const dummyString = "developer";
     // const currentComponent = this;
+    e.preventDefault();
     if (this.state.searchString){
       fetch('http://api.dataatwork.org/v1/jobs/autocomplete?contains=' + this.state.searchString, {
         method: 'GET',
@@ -70,25 +72,34 @@ export class SearchBar extends React.Component<{}, IState> {
     event.preventDefault();
   }
 
+  public handleKey(ev: any){
+      if (ev.key === 'Enter') {
+        this.searchFunction(ev);
+        ev.preventDefault();
+      }
+  }
+
   public render() {
     return (
       <AppBar position="static">
         <Toolbar>
           <Grid container={true} spacing={8}>
             <Grid item={true} xs={4}>
-              <Typography variant="display2" color="inherit">
+              <Typography variant="display1" color="inherit">
                 Job Skills
               </Typography>
             </Grid>
-            <Grid item={true} xs={6}>
+            <Grid item={true} xs={4}>
               <SearchIcon />
               <Input
+                style={{color: '#ffffff'}}
+                onKeyPress={this.handleKey}
                 placeholder="Search…"
                 disableUnderline={true}
                 onChange={this.handleChange}
               />
             </Grid>
-            <Grid item={true} xs={2}>
+            <Grid item={true} xs={4}>
               <Button 
                 color="inherit"
                 onClick={this.searchFunction}>
