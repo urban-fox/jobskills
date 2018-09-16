@@ -4,9 +4,9 @@ ENV NPM_CONFIG_LOGLEVEL warn
 ARG app_env
 ENV APP_ENV $app_env
 
-RUN mkdir -p /my-app
-WORKDIR /my-app
-COPY ./my-app ./
+RUN mkdir -p /job-skills
+WORKDIR /job-skills
+COPY ./job-skills ./
 
 RUN npm install
 
