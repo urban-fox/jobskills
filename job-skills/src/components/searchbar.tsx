@@ -45,7 +45,7 @@ export class SearchBar extends React.Component<{}, IState> {
     // const currentComponent = this;
     e.preventDefault();
     if (this.state.searchString){
-      fetch('http://api.dataatwork.org/v1/jobs/autocomplete?contains=' + this.state.searchString, {
+      fetch('https://api.dataatwork.org/v1/jobs/autocomplete?contains=' + this.state.searchString, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',

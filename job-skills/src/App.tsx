@@ -91,7 +91,7 @@ class App extends React.Component<{}, IState> {
     })
     if (jobID === undefined){return;}
     else {
-      fetch('http://api.dataatwork.org/v1/jobs/' + jobID + '/related_skills', {
+      fetch('https://api.dataatwork.org/v1/jobs/' + jobID + '/related_skills', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
