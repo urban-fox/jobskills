@@ -13,7 +13,16 @@ interface IJob {
   normalised_title: string,
   parent_uuid: any,
 }
-
+*/
+/*
+interface IProps {
+  setJobs: (jobArray: any[]) => void
+}
+*/
+interface IState {
+  displayedJobs: any[]
+}
+/*
 interface ISkill {
   uuid: string,
   name: string,
@@ -49,17 +58,36 @@ const skills: ISkill[] = [
 ]
 */
 
-class App extends React.Component {
+
+
+class App extends React.Component<{}, IState> {
+  // public displayedJobs: IJob[];
+  constructor(props: any) {
+    super(props);
+    this.setJobs = this.setJobs.bind(this);
+    this.state = {displayedJobs: [{initial: "one"}, {initial: "two"}]};
+  }
+
+  public setJobs(jobs: any){
+    // alert(JSON.stringify(jobs));
+    
+    this.setState(
+      {displayedJobs: jobs}
+    );
+  }
+
   public render() {
+    const jobs = JSON.stringify(this.state.displayedJobs);
     return (
       <div className="App">
-        <SearchBar />
+        <SearchBar setJobs={this.setJobs} />
         <Grid container={true} spacing={16}>
           <Grid item={true} xs={6}>
-            <CardPanel />
+            <CardPanel setJobs={this.setJobs} />
+            {jobs}
           </Grid>
           <Grid item={true} xs={6}>
-            <CardPanel />
+            <CardPanel setJobs={this.setJobs}/>
           </Grid>
       </Grid>
       </div>
